@@ -1,22 +1,18 @@
---- Mercurial.ini.orig	Fri Jun  6 09:33:30 2008
-+++ Mercurial.ini	Fri Jun  6 09:50:44 2008
-@@ -2,11 +2,8 @@
- ; per-user basis, please edit the following file instead, where
+--- Mercurial.ini	Thu Apr 30 12:20:42 2009
++++ /z/mozilla-build/Mercurial.ini	Thu Apr 30 12:28:05 2009
+@@ -3,8 +3,6 @@
  ; USERNAME is your Windows user name:
  ;   C:\Documents and Settings\USERNAME\Mercurial.ini
  
 -[ui]
 -editor = notepad
--
- [extensions]
- ; The win32text extension is available and installed by default.  It
- ; provides built-in Python hooks to perform line ending conversions.
- ; This is normally much faster than running an external program.
-@@ -83,4 +80,14 @@
- ecmerge.gui=True
+ ; show changed files and be a bit more verbose if True
+ ; verbose = True
  
- filemerge.args=-left $other -right $local -ancestor $base -merge $output
- filemerge.gui=True
+@@ -114,3 +112,13 @@
+ winmerge.regname=Executable
+ winmerge.checkchanged=True
+ winmerge.gui=True
 +
 +[diff]
 +git = 1
