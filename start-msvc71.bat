@@ -48,4 +48,4 @@ if defined MOZBUILD_USE_SDK (
 )
 
 cd "%USERPROFILE%"
-%MOZILLABUILD%\msys\bin\bash --login -i
+"%MOZILLABUILD%\msys\bin\bash" --login -i

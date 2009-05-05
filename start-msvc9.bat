@@ -77,7 +77,7 @@ cd "%USERPROFILE%"
 
 rem XXX The x64 cmd will not work ATM
 if exist "%WINDIR%\SYSWOW64\CMD.EXE" (
-   %WINDIR%\SYSWOW64\CMD.EXE /c %MOZILLABUILD%\msys\bin\bash --login -i
+   "%WINDIR%\SYSWOW64\CMD.EXE" /c "%MOZILLABUILD%msys\bin\bash" --login -i
  ) else (
-   %MOZILLABUILD%\msys\bin\bash --login -i
+   "%MOZILLABUILD%\msys\bin\bash" --login -i
 )

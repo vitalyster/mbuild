@@ -10,10 +10,10 @@ REM Get MSVC paths
 call "%MOZBUILDDIR%guess-msvc.bat"
 
 REM Use the "new" moztools-static
-set MOZ_TOOLS=%MOZBUILDDIR%moztools
+set "MOZ_TOOLS=%MOZBUILDDIR%moztools"
 
 rem append moztools to PATH
-SET PATH=%PATH%;%MOZ_TOOLS%\bin
+SET "PATH=%PATH%;%MOZ_TOOLS%\bin"
 
 if "%VC8DIR%"=="" (
     if "%VC8EXPRESSDIR%"=="" (
@@ -82,7 +82,7 @@ cd "%USERPROFILE%"
 
 rem XXX The x64 cmd will not work ATM
 if exist "%WINDIR%\SYSWOW64\CMD.EXE" (
-  %WINDIR%\SYSWOW64\CMD.EXE /c %MOZILLABUILD%\msys\bin\bash --login -i
+  "%WINDIR%\SYSWOW64\CMD.EXE" /c "%MOZILLABUILD%msys\bin\bash" --login -i
 ) else (
-  %MOZILLABUILD%\msys\bin\bash --login -i
+  "%MOZILLABUILD%\msys\bin\bash" --login -i
 )
