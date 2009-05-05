@@ -52,7 +52,7 @@ if "%VC8DIR%"=="" (
     call "%VC8DIR%\Bin\vcvars32.bat"
 
     rem If the SDK is Win2k3SP2 or higher, we want to use it
-    if %SDKVER% GEQ 5 (
+    if "%SDKVER%" GEQ 5 (
       SET USESDK=1
     )
 )
