@@ -86,16 +86,48 @@ REM Look for Installed SDKs:
 SET SDKROOTKEY=HKLM\SOFTWARE\Microsoft\MicrosoftSDK\InstalledSDKs
 SET SDK2003SP1KEY=%SDKROOTKEY%\8F9E5EF3-A9A5-491B-A889-C58EFFECE8B3
 SET SDK2003SP2KEY=%SDKROOTKEY%\D2FF9F89-8AA2-4373-8A31-C838BF4DBBE1
-SET SDK6KEY=HKLM\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v6.0\WinSDKBuild
+SET SDK6KEY=HKLM\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v6.0
+REM 6.0A comes with Visual C++ 2008. If you have 6.0 installed, even
+REM the express edition will update you to 6.0A
+SET SDK6AKEY=HKLM\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v6.0A
+SET SDK61KEY=HKLM\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v6.1
+SET SDK7KEY=HKLM\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v7.0
 
 REM Just a base value to compare against
 SET SDKVER=0
 SET SDKMINORVER=0
 
+REG QUERY "%SDK7KEY%" /v InstallationFolder >nul 2>nul
+if "%SDKDIR%"=="" (
+  IF %ERRORLEVEL% EQU 0 (
+    FOR /F "tokens=2* usebackq delims=	 " %%A IN (`REG QUERY "%SDK7KEY%" /v InstallationFolder`) DO SET SDKDIR=%%B
+    SET SDKVER=7
+  )
+)
+
+REG QUERY "%SDK61KEY%" /v InstallationFolder >nul 2>nul
+if "%SDKDIR%"=="" (
+  IF %ERRORLEVEL% EQU 0 (
+    FOR /F "tokens=2* usebackq delims=	 " %%A IN (`REG QUERY "%SDK61KEY%" /v InstallationFolder`) DO SET SDKDIR=%%B
+    SET SDKVER=6
+    SET SDKMINORVER=1
+  )
+)
+
+REG QUERY "%SDK6AKEY%" /v InstallationFolder >nul 2>nul
+if "%SDKDIR%"=="" (
+  IF %ERRORLEVEL% EQU 0 (
+    FOR /F "tokens=2* usebackq delims=	 " %%A IN (`REG QUERY "%SDK6AKEY%" /v InstallationFolder`) DO SET SDKDIR=%%B
+    SET SDKVER=6
+    REM insane, I know!
+    SET SDKMINORVER=0A
+  )
+)
+
 REG QUERY "%SDK6KEY%" /v InstallationFolder >nul 2>nul
 if "%SDKDIR%"=="" (
   IF %ERRORLEVEL% EQU 0 (
-    FOR /F "tokens=2* usebackq delims=	 " %%A IN (`REG QUERY "HKLM\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v6.0\WinSDKBuild" /v InstallationFolder`) DO SET SDKDIR=%%B
+    FOR /F "tokens=2* usebackq delims=	 " %%A IN (`REG QUERY "%SDK6KEY%" /v InstallationFolder`) DO SET SDKDIR=%%B
     SET SDKVER=6
   )
 )

@@ -34,20 +34,31 @@ if "%VC9DIR%"=="" (
     rem Don't set SDK paths in this block, because blocks are early-evaluated.
 
     rem Fix problem with VC++Express Edition
-    if "%SDKVER%"=="6" (
-        rem SDK Ver.6.0 (Windows Vista SDK) and 6.1 (Windows Server 2008 SDK)
-        rem does not contain ATL header files too.
-        rem It is needed to use Platform SDK's ATL header files.
+    if "%SDKVER%" GEQ 6 (
+        rem SDK Ver.6.0 (Windows Vista SDK) and newer
+        rem do not contain ATL header files.
+        rem We need to use the Platform SDK's ATL header files.
         SET USEPSDKATL=1
-
-        rem SDK ver.6.0 does not contain OleAcc.idl
-        rem It is needed to use Platform SDK's OleAcc.idl
-        if "%SDKMINORVER%"=="0" (
-            SET USEPSDKIDL=1
+    )
+    rem SDK ver.6.0 does not contain OleAcc.idl
+    rem We need to use the Platform SDK's OleAcc.idl
+    if "%SDKVER%" == "6" (
+        if "%SDKMINORVER%" == "0" (
+          SET USEPSDKIDL=1
         )
     )
 ) else (
     rem Prepend MSVC paths
+    rem If the SDK is Win2k8, we want to use it.
+    rem The Win7 SDK (or newer) should automatically integrate itself into vcvars32.bat
+    if "%SDKVER%" == "6" (
+        if "%SDKMINORVER%" == "1" (
+          SET USESDK=1
+        )
+    )
+    if "%USESDK%" == "0" (
+        ECHO Using VC 2008 built-in SDK
+    )
     call "%VC9DIR%\Bin\vcvars32.bat"
 )
 
