@@ -132,6 +132,14 @@ if "%SDKDIR%"=="" (
   )
 )
 
+REM The Vista SDK (6.0 and 6.0A) ships with a VC8 Express install
+
+if "%SDKVER%"=="6" (
+  if "%VC8EXPRESSDIR%"=="" (
+    SET VC8EXPRESSDIR=%SDKDIR%VC\
+  )
+)
+
 REG QUERY "%SDK2003SP2KEY%" /v "Install Dir" >nul 2>nul
 if "%PSDKDIR%"=="" (
   IF %ERRORLEVEL% EQU 0 (

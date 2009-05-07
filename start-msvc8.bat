@@ -29,8 +29,14 @@ if "%VC8DIR%"=="" (
     )
 
     rem Prepend MSVC paths
-    call "%VC8EXPRESSDIR%\Bin\vcvars32.bat"
-
+    if EXIST "%VC8EXPRESSDIR%\Bin\vcvars32.bat" (
+      call "%VC8EXPRESSDIR%\Bin\vcvars32.bat"
+    ) else (
+      rem Might be using a compiler that shipped with an SDK, so manually set paths
+      SET "PATH=%VC8EXPRESSDIR%\Bin;%PATH%"
+      SET "INCLUDE=%VC8EXPRESSDIR%\Include;%VC8EXPRESSDIR%\Include\Sys;%INCLUDE%"
+      SET "LIB=%VC8EXPRESSDIR%\Lib;%LIB%"
+    )
     SET USESDK=1
     rem Don't set SDK paths in this block, because blocks are early-evaluated.
 
