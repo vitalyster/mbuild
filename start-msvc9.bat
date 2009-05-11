@@ -34,7 +34,7 @@ if "%VC9DIR%"=="" (
     rem Don't set SDK paths in this block, because blocks are early-evaluated.
 
     rem Fix problem with VC++Express Edition
-    if "%SDKVER%" GEQ 6 (
+    if "%SDKVER%" GEQ "6" (
         rem SDK Ver.6.0 (Windows Vista SDK) and newer
         rem do not contain ATL header files.
         rem We need to use the Platform SDK's ATL header files.
