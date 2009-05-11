@@ -67,7 +67,7 @@ from subprocess import check_call
 from os import getcwd, remove, environ, chdir, walk
 from os.path import dirname, join, split, abspath, exists
 import optparse
-from shutil import rmtree
+from shutil import rmtree, copyfile
 
 sourcedir = join(split(abspath(__file__))[0])
 stagedir = getcwd()
@@ -103,6 +103,9 @@ check_call([join(sourcedir, "7z442.exe"),
 check_call(["msiexec.exe", "/a",
             join(sourcedir, "python-2.5.msi"),
             "TARGETDIR=" + join(stagedir, "mozilla-build", "python25")])
+# copy python.exe to python2.5.exe
+copyfile(join(stagedir, "mozilla-build", "python25", "python.exe"),
+         join(stagedir, "mozilla-build", "python25", "python2.5.exe"))
 check_call([join(sourcedir, "MSYS-1.0.10.exe"),
             "/DIR=" + join(stagedir, "mozilla-build", "msys"),
             # "/VERYSILENT", "/SUPRESSMSGBOXES",
