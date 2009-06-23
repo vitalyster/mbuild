@@ -12,12 +12,12 @@ if ErrorLevel
    Exit
 Click, 365, 365
 ; Python Setup (silent, just displays a finish screen)
-WinWait, Python.+Setup, Finish, 60
+WinWait, Python.+Setup, Finish, 600
 if ErrorLevel
    Exit
 Click, 350, 400
 ; MSYS setup (complicated)
-WinWait, Minimal SYStem, Welcome, 60
+WinWait, Minimal SYStem, Welcome, 600
 if ErrorLevel
    Exit
 WinActivate
@@ -112,7 +112,7 @@ WinWait, Setup - XEmacs, Ready to Install, 10
 if ErrorLevel
    Exit
 Click, 365, 365
-WinWait, Setup - XEmacs, Information, 60
+WinWait, Setup - XEmacs, Information, 600
 if ErrorLevel
    Exit
 Click, 365, 365
@@ -122,7 +122,7 @@ if ErrorLevel
 Click, 187, 164
 Click, 365, 365
 ; Mercurial Setup
-WinWait, Setup - Mercurial, Welcome to the Mercurial Setup Wizard, 60
+WinWait, Setup - Mercurial, Welcome to the Mercurial Setup Wizard, 600
 if ErrorLevel
    Exit
 WinActivate
@@ -144,7 +144,7 @@ WinWait, Setup - Mercurial, Ready to Install, 10
 if ErrorLevel
    Exit
 Click, 365, 365
-WinWait, Setup - Mercurial, Information, 60
+WinWait, Setup - Mercurial, Information, 600
 if ErrorLevel
    Exit
 Click, 365, 365
