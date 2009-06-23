@@ -106,7 +106,7 @@ check_call(["msiexec.exe", "/a",
 # copy python.exe to python2.5.exe
 copyfile(join(stagedir, "mozilla-build", "python25", "python.exe"),
          join(stagedir, "mozilla-build", "python25", "python2.5.exe"))
-check_call([join(sourcedir, "MSYS-1.0.10.exe"),
+check_call([join(sourcedir, "MSYS-1.0.11-rc-1.exe"),
             "/DIR=" + join(stagedir, "mozilla-build", "msys"),
             # "/VERYSILENT", "/SUPRESSMSGBOXES",
             "/SP-", "/NOICONS"])
@@ -121,7 +121,6 @@ check_call([join(sourcedir, "Mercurial-1.2.1.exe"),
             "/DIR=" + join(stagedir, "mozilla-build", "hg"),
             "/SP-", "/NOICONS"])
 # Run an MSYS shell to perform the following tasks:
-# * install make-3.81
 # * install UPX
 # * install blat
 # * install SVN

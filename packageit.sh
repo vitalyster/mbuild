@@ -19,16 +19,6 @@ pushd "${MSYS_STAGEDIR}/mozilla-build/hg"
 patch -p0 < "${MSYS_SRCDIR}/Mercurial.ini.patch"
 popd
 
-# "rm.exe" from the msysCORE package is broken pretty badly. Use the "old" one
-cp "${MSYS_STAGEDIR}/mozilla-build/msys/bin/rm.exe" "${MSYS_STAGEDIR}"
-
-# Install msysCORE update
-tar -xjf "${MSYS_SRCDIR}/msysCORE-1.0.11-2007.01.19-1.tar.bz2" -C "${MSYS_STAGEDIR}/mozilla-build/msys"
-cp "${MSYS_STAGEDIR}/rm.exe" "${MSYS_STAGEDIR}/mozilla-build/msys/bin"
-
-# copy /bin/sh to /bin/bash
-cp "${MSYS_STAGEDIR}/mozilla-build/msys/bin/sh.exe" "${MSYS_STAGEDIR}/mozilla-build/msys/bin/bash.exe"
-
 # install UPX
 unzip -d "${MSYS_STAGEDIR}/mozilla-build" "${MSYS_SRCDIR}/upx203w.zip"
 
