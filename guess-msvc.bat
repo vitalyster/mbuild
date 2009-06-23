@@ -169,12 +169,12 @@ if "%PSDKDIR%"=="" (
   )
 )
 
-ECHO Visual C++ 6 directory: %VC6DIR%
-ECHO Visual C++ 7.1 directory: %VC71DIR%
-ECHO Visual C++ 8 directory: %VC8DIR%
-ECHO Visual C++ 8 Express directory: %VC8EXPRESSDIR%
-ECHO Visual C++ 9 directory: %VC9DIR%
-ECHO Visual C++ 9 Express directory: %VC9EXPRESSDIR%
+if defined %VC6DIR% (ECHO Visual C++ 6 directory: %VC6DIR%)
+if defined %VC71DIR% (ECHO Visual C++ 7.1 directory: %VC71DIR%)
+if defined %VC8DIR% (ECHO Visual C++ 8 directory: %VC8DIR%)
+if defined %VC8EXPRESSDIR% (ECHO Visual C++ 8 Express directory: %VC8EXPRESSDIR%)
+if defined %VC9DIR% (ECHO Visual C++ 9 directory: %VC9DIR%)
+if defined %VC9EXPRESSDIR% (ECHO Visual C++ 9 Express directory: %VC9EXPRESSDIR%)
 if "%SDKDIR%"=="" (
     SET SDKDIR=%PSDKDIR%
     SET SDKVER=%PSDKVER%
@@ -182,5 +182,7 @@ if "%SDKDIR%"=="" (
     ECHO Windows SDK directory: %SDKDIR%
     ECHO Windows SDK version: %SDKVER%.%SDKMINORVER%
 )
-ECHO Platform SDK directory: %PSDKDIR%
-ECHO Platform SDK version: %PSDKVER%
+if not "%PSDKDIR%"=="" (
+    ECHO Platform SDK directory: %PSDKDIR%
+    ECHO Platform SDK version: %PSDKVER%
+)
