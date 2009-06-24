@@ -31,6 +31,15 @@ make LD="gcc -shared"
 make install PREFIX="${MSYS_STAGEDIR}/mozilla-build/msys"
 popd
 
+# The make 3.81 shipping with msys is still broken, so continue shipping this.
+tar -xjf "${MSYS_SRCDIR}/make-3.81.90.tar.bz2" -C "${MSYS_STAGEDIR}"
+pushd "${MSYS_STAGEDIR}/make-3.81.90"
+patch -p0 < "${MSYS_SRCDIR}/make-msys.patch"
+./configure --prefix=/local
+make
+make install prefix="${MSYS_STAGEDIR}/mozilla-build/msys/local"
+popd
+
 # This CVS has issues, so disable building it for now.
 # See bug 409260 for details.
 #

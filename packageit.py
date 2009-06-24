@@ -121,6 +121,7 @@ check_call([join(sourcedir, "Mercurial-1.2.1.exe"),
             "/DIR=" + join(stagedir, "mozilla-build", "hg"),
             "/SP-", "/NOICONS"])
 # Run an MSYS shell to perform the following tasks:
+# * install make-3.81.90
 # * install UPX
 # * install blat
 # * install SVN
