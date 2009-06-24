@@ -120,6 +120,9 @@ check_call([join(sourcedir, "XEmacs Setup 21.4.19.exe"),
 check_call([join(sourcedir, "Mercurial-1.2.1.exe"),
             "/DIR=" + join(stagedir, "mozilla-build", "hg"),
             "/SP-", "/NOICONS"])
+check_call([join(sourcedir, "KDiff3Setup_0.9.95.exe"),
+            "/S",
+            "/DIR=" + join(stagedir, "mozilla-build", "kdiff3")])
 # Run an MSYS shell to perform the following tasks:
 # * install make-3.81.90
 # * install UPX
