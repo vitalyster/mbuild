@@ -127,6 +127,7 @@ check_call([join(sourcedir, "KDiff3Setup_0.9.95.exe"),
 # install setuptools from egg
 check_call([join(stagedir, "mozilla-build", "python25", "python.exe"),
             join(sourcedir, "ez_setup.py"),
+            "-H", "None",
             join(sourcedir, "setuptools-0.6c9-py2.5.egg")])
 
 # awful, but distutils hardcodes the interpreter path in the scripts,
