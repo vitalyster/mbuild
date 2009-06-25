@@ -47,7 +47,7 @@ if ErrorLevel
    Exit
 Click, 360, 360
 ; Answer no to post-setup
-WinWaitActive, ahk_class ConsoleWindowClass, , 60
+WinWaitActive, ahk_class ConsoleWindowClass, , 600
 if ErrorLevel
    Exit
 Sleep 2000
@@ -61,7 +61,7 @@ Click, 185, 130
 Click, 185, 155
 Click, 360, 360
 ; MSYS DTK
-WinWait, MSYS Developer Tool Kit, Welcome, 60
+WinWait, MSYS Developer Tool Kit, Welcome, 600
 if ErrorLevel
    Exit
 WinActivate
@@ -82,7 +82,7 @@ WinWait, MSYS Developer Tool Kit, Ready, 10
 if ErrorLevel
    Exit
 Click, 360, 360
-WinWait, MSYS Developer Tool Kit, InfoAfter, 60
+WinWait, MSYS Developer Tool Kit, InfoAfter, 600
 if ErrorLevel
    Exit
 Click, 360, 360
@@ -91,7 +91,7 @@ if ErrorLevel
    Exit
 Click, 360, 360
 ; XEmacs Setup
-WinWait, Setup - XEmacs, Welcome to the XEmacs Setup Wizard, 60
+WinWait, Setup - XEmacs, Welcome to the XEmacs Setup Wizard, 600
 if ErrorLevel
    Exit
 WinActivate
