@@ -20,4 +20,8 @@ Section "MozillaBuild"
   continue:
   SetOutPath $INSTDIR
   File /r *.*
+  ; write the full path to ca-bundle.crt in wget.ini
+  FileOpen $0 "$INSTDIR\wget\wget.ini" w
+  FileWrite $0 "ca_certificate=$INSTDIR\wget\ca-bundle.crt$\r$\n"
+  FileClose $0
 SectionEnd

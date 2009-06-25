@@ -96,6 +96,9 @@ popd
 
 # Install wget
 unzip -d "${MSYS_STAGEDIR}/mozilla-build/wget" "${MSYS_SRCDIR}/wget-1.10.2b.zip"
+# copy over CA certificates in PEM format (converted from Firefox's defaults)
+# so SSL will work
+cp "${MSYS_SRCDIR}"/ca-bundle.crt "${MSYS_STAGEDIR}/mozilla-build/wget"
 
 # stage files to make the installer
 cp "${MSYS_SRCDIR}"/{license.rtf,installit.nsi} "${MSYS_STAGEDIR}"
