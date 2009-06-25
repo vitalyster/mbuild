@@ -123,6 +123,12 @@ check_call([join(sourcedir, "Mercurial-1.2.1.exe"),
 check_call([join(sourcedir, "KDiff3Setup_0.9.95.exe"),
             "/S",
             "/D=" + join(stagedir, "mozilla-build", "kdiff3")])
+
+# install setuptools from egg
+check_call([join(stagedir, "mozilla-build", "python25", "python.exe"),
+            join(sourcedir, "ez_setup.py"),
+            join(sourcedir, "setuptools-0.6c9-py2.5.egg")])
+
 # Run an MSYS shell to perform the following tasks:
 # * install make-3.81.90
 # * install UPX
