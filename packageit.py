@@ -129,6 +129,22 @@ check_call([join(stagedir, "mozilla-build", "python25", "python.exe"),
             join(sourcedir, "ez_setup.py"),
             join(sourcedir, "setuptools-0.6c9-py2.5.egg")])
 
+# awful, but distutils hardcodes the interpreter path in the scripts,
+# which breaks because it uses the path on the machine we built this package
+# on, not the machine you installed it on.
+# See http://docs.python.org/distutils/setupscript.html#installing-scripts
+# (easy_setup.py doesn't seem to have a way to pass down --executable)
+def munge_easy_install_script(path):
+    f = file(path)
+    lines = f.readlines()
+    f.close()
+    f = file(path, "w")
+    f.write("#!python.exe\n")
+    f.write('\n'.join(lines[1:]))
+    f.close()
+munge_easy_install_script(join(stagedir, "mozilla-build", "python25", "Scripts", "easy_install-script.py"))
+munge_easy_install_script(join(stagedir, "mozilla-build", "python25", "Scripts", "easy_install-2.5-script.py"))
+
 # Run an MSYS shell to perform the following tasks:
 # * install make-3.81.90
 # * install UPX
@@ -161,7 +177,8 @@ manifest = join(sourcedir, "noprivs.manifest")
 embed_recursedir(join(stagedir, "mozilla-build", "msys"), manifest)
 embedmanifest(join(stagedir, "mozilla-build", "moztools", "bin", "nsinstall.exe"), manifest)
 embedmanifest(join(stagedir, "mozilla-build", "moztools-180compat", "bin", "nsinstall.exe"), manifest)
-
+embedmanifest(join(stagedir, "mozilla-build", "python25", "Scripts", "easy_install.exe"), manifest)
+embedmanifest(join(stagedir, "mozilla-build", "python25", "Scripts", "easy_install-2.5.exe"), manifest)
 
 # Make an installer
 chdir(stagedir)
