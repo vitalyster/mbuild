@@ -114,9 +114,6 @@ check_call([join(sourcedir, "msysDTK-1.0.1.exe"),
             "/DIR=" + join(stagedir, "mozilla-build", "msys"),
             # "/VERYSILENT", "/SUPRESSMSGBOXES",
             "/SP-", "/NOICONS"])
-check_call([join(sourcedir, "XEmacs Setup 21.4.19.exe"),
-            "/DIR=" + join(stagedir, "mozilla-build", "xemacs"),
-            "/SP-", "/NOICONS"])
 check_call([join(sourcedir, "Mercurial-1.2.1.exe"),
             "/DIR=" + join(stagedir, "mozilla-build", "hg"),
             "/SP-", "/NOICONS"])
@@ -151,6 +148,7 @@ munge_easy_install_script(join(stagedir, "mozilla-build", "python25", "Scripts",
 # * install UPX
 # * install blat
 # * install SVN
+# * install emacs
 # * build and install libiconv
 
 check_call([join(msysdir, "bin", "sh.exe"), "--login",

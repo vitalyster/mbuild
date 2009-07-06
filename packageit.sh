@@ -19,6 +19,9 @@ pushd "${MSYS_STAGEDIR}/mozilla-build/hg"
 patch -p0 < "${MSYS_SRCDIR}/Mercurial.ini.patch"
 popd
 
+# install emacs
+unzip -d "${MSYS_STAGEDIR}/mozilla-build" "${MSYS_SRCDIR}/emacs-22.3-bin-i386.zip"
+
 # install UPX
 unzip -d "${MSYS_STAGEDIR}/mozilla-build" "${MSYS_SRCDIR}/upx203w.zip"
 
