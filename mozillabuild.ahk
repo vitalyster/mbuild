@@ -90,37 +90,6 @@ WinWait, MSYS Developer Tool Kit, Finished, 10
 if ErrorLevel
    Exit
 Click, 360, 360
-; XEmacs Setup
-WinWait, Setup - XEmacs, Welcome to the XEmacs Setup Wizard, 600
-if ErrorLevel
-   Exit
-WinActivate
-Click, 365, 365
-WinWait, Setup - XEmacs, Select Destination Location, 10
-if ErrorLevel
-   Exit
-Click, 365, 365
-WinWait, Setup - XEmacs, Select Start Menu Folder, 10
-if ErrorLevel
-   Exit
-Click, 365, 365
-WinWait, Setup - XEmacs, Select Additional Tasks, 10
-if ErrorLevel
-   Exit
-Click, 365, 365
-WinWait, Setup - XEmacs, Ready to Install, 10
-if ErrorLevel
-   Exit
-Click, 365, 365
-WinWait, Setup - XEmacs, Information, 600
-if ErrorLevel
-   Exit
-Click, 365, 365
-WinWait, Setup - XEmacs, Completing the XEmacs Setup Wizard, 10
-if ErrorLevel
-   Exit
-Click, 187, 164
-Click, 365, 365
 ; Mercurial Setup
 WinWait, Setup - Mercurial, Welcome to the Mercurial Setup Wizard, 600
 if ErrorLevel
