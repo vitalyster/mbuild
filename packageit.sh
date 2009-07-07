@@ -80,6 +80,9 @@ cp "${MSYS_STAGEDIR}/buildtools/windows/include/libIDL/IDL.h" "${MSYS_STAGEDIR}/
 cp "${MSYS_STAGEDIR}"/buildtools/windows/lib/*.lib \
     "${MSYS_STAGEDIR}/mozilla-build/moztools-180compat/lib"
 
+# install moztools x64
+unzip -d "${MSYS_STAGEDIR}/mozilla-build" "${MSYS_SRCDIR}/moztools-static-x64.zip"
+
 # Copy various configuration files
 cp "${MSYS_SRCDIR}/inputrc" "${MSYS_STAGEDIR}/mozilla-build/msys/etc"
 mkdir "${MSYS_STAGEDIR}/mozilla-build/msys/etc/profile.d"
