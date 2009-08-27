@@ -7,4 +7,5 @@ if test -n "$MOZILLABUILD"; then
     CVS_RSH=ssh
     APR_ICONV_PATH="$MSYS_MOZBUILD/svn-win32-1.6.3/iconv"
     export PATH EDITOR CVS_RSH APR_ICONV_PATH
+    export HOSTTYPE MACHTYPE OSTYPE SHELL
 fi
