@@ -35,6 +35,8 @@ SET MSVC8KEY=%MSVCROOTKEY%\8.0\Setup\VC
 SET MSVC8EXPRESSKEY=%MSVCEXPROOTKEY%\8.0\Setup\VC
 SET MSVC9KEY=%MSVCROOTKEY%\9.0\Setup\VC
 SET MSVC9EXPRESSKEY=%MSVCEXPROOTKEY%\9.0\Setup\VC
+SET MSVC10KEY=%MSVCROOTKEY%\10.0\Setup\VC
+SET MSVC10EXPRESSKEY=%MSVCEXPROOTKEY%\10.0\Setup\VC
 
 REM First see if we can find MSVC, then set the variable
 REM NOTE: delims=<tab><space>
@@ -91,6 +93,20 @@ REG QUERY "%MSVC9EXPRESSKEY%" /v ProductDir >nul 2>nul
 if "%VC9EXPRESSDIR%"=="" (
   IF %ERRORLEVEL% EQU 0 (
     FOR /F "tokens=2* delims=	 " %%A IN ('REG QUERY "%MSVC9EXPRESSKEY%" /v ProductDir') DO SET VC9EXPRESSDIR=%%B
+  )
+)
+
+REG QUERY "%MSVC10KEY%" /v ProductDir >nul 2>nul
+if "%VC10DIR%"=="" (
+  IF %ERRORLEVEL% EQU 0 (
+    FOR /F "tokens=2* delims=	 " %%A IN ('REG QUERY "%MSVC10KEY%" /v ProductDir') DO SET VC10DIR=%%B
+  )
+)
+
+REG QUERY "%MSVC10EXPRESSKEY%" /v ProductDir >nul 2>nul
+if "%VC8EXPRESSDIR%"=="" (
+  IF %ERRORLEVEL% EQU 0 (
+    FOR /F "tokens=2* delims=	 " %%A IN ('REG QUERY "%MSVC10EXPRESSKEY%" /v ProductDir') DO SET VC10EXPRESSDIR=%%B
   )
 )
 
@@ -175,6 +191,8 @@ if defined %VC8DIR% (ECHO Visual C++ 8 directory: %VC8DIR%)
 if defined %VC8EXPRESSDIR% (ECHO Visual C++ 8 Express directory: %VC8EXPRESSDIR%)
 if defined %VC9DIR% (ECHO Visual C++ 9 directory: %VC9DIR%)
 if defined %VC9EXPRESSDIR% (ECHO Visual C++ 9 Express directory: %VC9EXPRESSDIR%)
+if defined %VC10DIR% (ECHO Visual C++ 10 directory: %VC9DIR%)
+if defined %VC10EXPRESSDIR% (ECHO Visual C++ 10 Express directory: %VC9EXPRESSDIR%)
 if "%SDKDIR%"=="" (
     SET SDKDIR=%PSDKDIR%
     SET SDKVER=%PSDKVER%
