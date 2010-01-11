@@ -125,8 +125,18 @@ REM Just a base value to compare against
 SET SDKVER=0
 SET SDKMINORVER=0
 
+REM Support a maximum version of the Windows SDK to use, to support older
+REM branches and older compilers.  (Note that this is unrelated to the configure
+REM option on which version of Windows to support.)
+IF NOT DEFINED MOZ_MAXWINSDK (
+  REM Maximum WinSDK version to use; 2 digits for major, 2 for minor, 2 for revision
+  REM Revivsion is A = 01, B = 02, etc.
+  SET MOZ_MAXWINSDK=999999
+)
+
+
 REG QUERY "%SDK7KEY%" /v InstallationFolder >nul 2>nul
-if "%SDKDIR%"=="" (
+if "%SDKDIR%"=="" IF %MOZ_MAXWINSDK% GEQ 70000 (
   IF %ERRORLEVEL% EQU 0 (
     FOR /F "tokens=2* usebackq delims=	 " %%A IN (`REG QUERY "%SDK7KEY%" /v InstallationFolder`) DO SET SDKDIR=%%B
     SET SDKVER=7
@@ -134,7 +144,7 @@ if "%SDKDIR%"=="" (
 )
 
 REG QUERY "%SDK61KEY%" /v InstallationFolder >nul 2>nul
-if "%SDKDIR%"=="" (
+if "%SDKDIR%"=="" IF %MOZ_MAXWINSDK% GEQ 60100 (
   IF %ERRORLEVEL% EQU 0 (
     FOR /F "tokens=2* usebackq delims=	 " %%A IN (`REG QUERY "%SDK61KEY%" /v InstallationFolder`) DO SET SDKDIR=%%B
     SET SDKVER=6
@@ -143,7 +153,7 @@ if "%SDKDIR%"=="" (
 )
 
 REG QUERY "%SDK6AKEY%" /v InstallationFolder >nul 2>nul
-if "%SDKDIR%"=="" (
+if "%SDKDIR%"=="" IF %MOZ_MAXWINSDK% GEQ 60001 (
   IF %ERRORLEVEL% EQU 0 (
     FOR /F "tokens=2* usebackq delims=	 " %%A IN (`REG QUERY "%SDK6AKEY%" /v InstallationFolder`) DO SET SDKDIR=%%B
     SET SDKVER=6
@@ -153,7 +163,7 @@ if "%SDKDIR%"=="" (
 )
 
 REG QUERY "%SDK6KEY%" /v InstallationFolder >nul 2>nul
-if "%SDKDIR%"=="" (
+if "%SDKDIR%"=="" IF %MOZ_MAXWINSDK% GEQ 60000 (
   IF %ERRORLEVEL% EQU 0 (
     FOR /F "tokens=2* usebackq delims=	 " %%A IN (`REG QUERY "%SDK6KEY%" /v InstallationFolder`) DO SET SDKDIR=%%B
     SET SDKVER=6
@@ -169,7 +179,7 @@ if "%SDKVER%"=="6" (
 )
 
 REG QUERY "%SDK2003SP2KEY%" /v "Install Dir" >nul 2>nul
-if "%PSDKDIR%"=="" (
+if "%PSDKDIR%"=="" IF %MOZ_MAXWINSDK% GEQ 50000 (
   IF %ERRORLEVEL% EQU 0 (
     FOR /F "tokens=3* delims=	 " %%A IN ('REG QUERY "%SDK2003SP2KEY%" /v "Install Dir"') DO SET PSDKDIR=%%B
     REM arbitrary, but works for me
@@ -178,7 +188,7 @@ if "%PSDKDIR%"=="" (
 )
 
 REG QUERY "%SDK2003SP1KEY%" /v "Install Dir" >nul 2>nul
-if "%PSDKDIR%"=="" (
+if "%PSDKDIR%"=="" IF %MOZ_MAXWINSDK% GEQ 40000 (
   IF %ERRORLEVEL% EQU 0 (
     FOR /F "tokens=3* delims=	 " %%A IN ('REG QUERY "%SDK2003SP1KEY%" /v "Install Dir"') DO SET PSDKDIR=%%B
     SET PSDKVER=4
