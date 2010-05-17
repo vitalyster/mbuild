@@ -29,7 +29,7 @@ if "%VC10DIR%"=="" (
     )
 
     rem Prepend MSVC paths
-    call "%VC10EXPRESSDIR%\Bin\amd64\vcvarsamd64.bat"
+    call "%VC10EXPRESSDIR%\bin\amd64\vcvars64.bat"
 
     rem Don't set SDK paths in this block, because blocks are early-evaluated.
 
@@ -51,7 +51,7 @@ if "%VC10DIR%"=="" (
     rem Prepend MSVC paths
     rem The Win7 SDK (or newer) should automatically integrate itself into vcvars32.bat
     ECHO Using VC 2010 built-in SDK
-    call "%VC10DIR%\Bin\amd64\vcvarsamd64.bat"
+    call "%VC10DIR%\bin\amd64\vcvars64.bat"
 )
 
 if "%VC10DIR%"=="" (
