@@ -59,12 +59,13 @@
 # ** Put the exe files in c:\windows
 # * [http://www.python.org/ftp/python/2.5.1/python-2.5.1.msi Python 2.5]
 # * [http://superb-west.dl.sourceforge.net/sourceforge/nsis/nsis-2.33-setup.exe NSIS]
+# * [http://code.google.com/p/unsis/downloads/detail?name=nsis-2.46-Unicode-setup.exe NSIS]
 # * [http://mxr.mozilla.org/mozilla/source/tools/build-environment/win32/unz552xN.exe?raw=1&ctype=application/octet-stream unzip]
 # ** Extract to c:\program files\unzip
 # * Append ';c:\python25;c:\program files\nsis;c:\program files\unzip' to path.
 # 
 from subprocess import check_call
-from os import getcwd, remove, environ, chdir, walk
+from os import getcwd, remove, environ, chdir, walk, rename, remove
 from os.path import dirname, join, split, abspath, exists
 import optparse
 from shutil import rmtree, copyfile
@@ -126,6 +127,18 @@ check_call([join(stagedir, "mozilla-build", "python25", "python.exe"),
             join(sourcedir, "ez_setup.py"),
             "-H", "None",
             join(sourcedir, "setuptools-0.6c9-py2.5.egg")])
+
+# install NSIS 2.46 Unicode
+check_call([join(sourcedir, "nsis-2.46-Unicode-setup.exe"),
+            "/S",
+            "/D=" + join(stagedir, "mozilla-build", "nsis-2.46u")])
+
+# rename the NSIS executable
+rename(join(stagedir, "mozilla-build", "nsis-2.46u", "makensis.exe"),
+       join(stagedir, "mozilla-build", "nsis-2.46u", "makensisu-2.46.exe"))
+
+# remove the NSIS uninstaller
+remove(join(stagedir, "mozilla-build", "nsis-2.46u", "uninst-nsis.exe"))
 
 # awful, but distutils hardcodes the interpreter path in the scripts,
 # which breaks because it uses the path on the machine we built this package
