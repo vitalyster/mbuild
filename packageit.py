@@ -97,7 +97,7 @@ print("Source file location: " + sourcedir)
 print("Output location: " + stagedir)
 
 if exists(join(stagedir, "mozilla-build")):
-    rmtree(join(stagedir, "mozilla-build"))
+    check_call(["cmd.exe", "/C", "rmdir /S /Q %s" % join(stagedir, "mozilla-build")])
 
 check_call([join(sourcedir, "7z442.exe"),
             "/D=" + join(stagedir, "mozilla-build", "7zip")])
