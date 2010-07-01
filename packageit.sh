@@ -95,6 +95,9 @@ cp "${MSYS_SRCDIR}"/{profile-inputrc.sh,profile-extravars.sh,profile-echo.sh,pro
 # Copy the batch files that make everything go!
 cp "${MSYS_SRCDIR}"/{guess-msvc.bat,start-msvc6.bat,start-msvc71.bat,start-msvc8.bat,start-msvc9.bat,start-msvc10.bat,start-l10n.bat,start-msvc8-x64.bat,start-msvc9-x64.bat,start-msvc10-x64.bat} "${MSYS_STAGEDIR}/mozilla-build"
 
+# Copy VERSION file
+cp "${MSYS_SRCDIR}"/VERSION "${MSYS_STAGEDIR}/mozilla-build"
+
 # Install autoconf 2.13
 tar -xzf "${MSYS_SRCDIR}/autoconf-2.13.tar.gz" -C "${MSYS_STAGEDIR}"
 pushd "${MSYS_STAGEDIR}/autoconf-2.13"
@@ -111,4 +114,6 @@ cp "${MSYS_SRCDIR}"/ca-bundle.crt "${MSYS_STAGEDIR}/mozilla-build/wget"
 
 # stage files to make the installer
 cp "${MSYS_SRCDIR}"/{license.rtf,installit.nsi} "${MSYS_STAGEDIR}"
+version=`cat "${MSYS_SRCDIR}"/VERSION`
+sed < "${MSYS_SRCDIR}"/version.nsi s/@VERSION@/$version/g > "${MSYS_STAGEDIR}"/version.nsi
 unix2dos "${MSYS_STAGEDIR}/license.rtf"

@@ -1,11 +1,10 @@
+!include version.nsi
 !cd mozilla-build
 
 !include WinVer.nsh
 RequestExecutionLevel highest
 
-name "Mozilla Build"
 SetCompressor /SOLID lzma
-OutFile "..\MozillaBuildSetup.exe"
 InstallDir "C:\mozilla-build"
 
 LicenseData "..\license.rtf"
