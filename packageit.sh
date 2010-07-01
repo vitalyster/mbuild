@@ -93,7 +93,7 @@ cp "${MSYS_SRCDIR}"/{profile-inputrc.sh,profile-extravars.sh,profile-echo.sh,pro
     "${MSYS_STAGEDIR}/mozilla-build/msys/etc/profile.d"
 
 # Copy the batch files that make everything go!
-cp "${MSYS_SRCDIR}"/{guess-msvc.bat,start-msvc6.bat,start-msvc71.bat,start-msvc8.bat,start-msvc9.bat,start-l10n.bat,start-msvc8-x64.bat,start-msvc9-x64.bat} "${MSYS_STAGEDIR}/mozilla-build"
+cp "${MSYS_SRCDIR}"/{guess-msvc.bat,start-msvc6.bat,start-msvc71.bat,start-msvc8.bat,start-msvc9.bat,start-msvc10.bat,start-l10n.bat,start-msvc8-x64.bat,start-msvc9-x64.bat,start-msvc10-x64.bat} "${MSYS_STAGEDIR}/mozilla-build"
 
 # Install autoconf 2.13
 tar -xzf "${MSYS_SRCDIR}/autoconf-2.13.tar.gz" -C "${MSYS_STAGEDIR}"
