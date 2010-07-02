@@ -15,8 +15,8 @@ MSYS_SRCDIR=$(cd "$MOZ_SRCDIR" && pwd)
 MSYS_STAGEDIR=$(cd "$MOZ_STAGEDIR" && pwd)
 
 # Patch Mercurial.ini
-pushd "${MSYS_STAGEDIR}/mozilla-build/hg"
-patch -p0 < "${MSYS_SRCDIR}/Mercurial.ini.patch"
+pushd "${MSYS_STAGEDIR}/mozilla-build/hg/hgrc.d"
+patch -p0 < "${MSYS_SRCDIR}/Mercurial.rc.patch"
 popd
 
 # install emacs
