@@ -26,6 +26,8 @@ unzip -d "${MSYS_STAGEDIR}/mozilla-build" "${MSYS_SRCDIR}/emacs-22.3-bin-i386.zi
 unzip -d "${MSYS_STAGEDIR}/mozilla-build" "${MSYS_SRCDIR}/vim72rt.zip"
 unzip -d "${MSYS_STAGEDIR}/mozilla-build" "${MSYS_SRCDIR}/vim72w32.zip"
 unzip -o -d "${MSYS_STAGEDIR}/mozilla-build" "${MSYS_SRCDIR}/gvim72.zip"
+# copy the vi and view shell scripts to the bin dir
+cp "${MSYS_SRCDIR}"/{vi,view} "${MSYS_STAGEDIR}"/mozilla-build/vim/vim72
 
 # install UPX
 unzip -d "${MSYS_STAGEDIR}/mozilla-build" "${MSYS_SRCDIR}/upx203w.zip"
