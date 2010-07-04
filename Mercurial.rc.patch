@@ -1,0 +1,46 @@
+--- Mercurial.rc.orig	Fri Jul  2 13:18:16 2010
++++ Mercurial.rc	Fri Jul  2 13:20:15 2010
+@@ -16,7 +16,7 @@
+ 
+ [ui]
+ ; editor used to enter commit logs, etc.  Most text editors will work.
+-editor = notepad
++; editor = notepad
+ ; show changed files and be a bit more verbose if True
+ ; verbose = True
+  
+@@ -46,13 +46,13 @@
+ ;extdiff =
+ ;fetch =
+ ;gpg =
+-;graphlog = 
++graphlog = 
+ ;hgcia =
+ ;hgk =
+ ;highlight = 
+ ;interhg =
+ ;keyword =
+-;mq =
++mq =
+ ;notify =
+ ;pager =
+ ;parentrevspec =
+@@ -66,6 +66,9 @@
+ ;win32text =
+ ;zeroconf =
+ 
++[defaults]
++diff =-p -U 8
++
+ ; To use cleverencode/cleverdecode, you must enable win32text extension
+ 
+ [encode]
+@@ -120,6 +123,7 @@
+ ; expect normal patches. so enable git patches at your own risk.
+ ;
+ [diff]
+-;git = false
++git = true
++showfunc = true
+ ;nodates = false
+ 

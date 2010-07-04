@@ -90,36 +90,3 @@ WinWait, MSYS Developer Tool Kit, Finished, 10
 if ErrorLevel
    Exit
 Click, 360, 360
-; Mercurial Setup
-WinWait, Setup - Mercurial, Welcome to the Mercurial Setup Wizard, 600
-if ErrorLevel
-   Exit
-WinActivate
-Click, 365, 365
-WinWait, Setup - Mercurial, License Agreement, 10
-if ErrorLevel
-   Exit
-Click, 50, 305
-Click, 365, 365
-WinWait, Setup - Mercurial, Select Destination Location, 10
-if ErrorLevel
-   Exit
-Click, 365, 365
-WinWait, Setup - Mercurial, Select Start Menu Folder, 10
-if ErrorLevel
-   Exit
-Click, 365, 365
-WinWait, Setup - Mercurial, Ready to Install, 10
-if ErrorLevel
-   Exit
-Click, 365, 365
-WinWait, Setup - Mercurial, Information, 600
-if ErrorLevel
-   Exit
-Click, 365, 365
-WinWait, Setup - Mercurial, Completing the Mercurial Setup Wizard, 10
-if ErrorLevel
-   Exit
-Click, 190, 160
-Click, 190, 185
-Click, 365, 365

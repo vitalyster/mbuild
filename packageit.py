@@ -57,7 +57,7 @@
 # == Other Applications ==
 # * [http://www.bastet.com/uddu.zip unix2dos]
 # ** Put the exe files in c:\windows
-# * [http://www.python.org/ftp/python/2.5.1/python-2.5.1.msi Python 2.5]
+# * [http://www.python.org/ftp/python/2.6.5/python-2.6.5.msi Python 2.6]
 # * [http://superb-west.dl.sourceforge.net/sourceforge/nsis/nsis-2.33-setup.exe NSIS]
 # * [http://code.google.com/p/unsis/downloads/detail?name=nsis-2.46-Unicode-setup.exe NSIS]
 # * [http://mxr.mozilla.org/mozilla/source/tools/build-environment/win32/unz552xN.exe?raw=1&ctype=application/octet-stream unzip]
@@ -97,16 +97,16 @@ print("Source file location: " + sourcedir)
 print("Output location: " + stagedir)
 
 if exists(join(stagedir, "mozilla-build")):
-    rmtree(join(stagedir, "mozilla-build"))
+    check_call(["cmd.exe", "/C", "rmdir /S /Q %s" % join(stagedir, "mozilla-build")])
 
-check_call([join(sourcedir, "7z442.exe"),
+check_call([join(sourcedir, "7z465.exe"),
             "/D=" + join(stagedir, "mozilla-build", "7zip")])
 check_call(["msiexec.exe", "/a",
-            join(sourcedir, "python-2.5.msi"),
-            "TARGETDIR=" + join(stagedir, "mozilla-build", "python25")])
-# copy python.exe to python2.5.exe
-copyfile(join(stagedir, "mozilla-build", "python25", "python.exe"),
-         join(stagedir, "mozilla-build", "python25", "python2.5.exe"))
+            join(sourcedir, "python-2.6.5.msi"),
+            "TARGETDIR=" + join(stagedir, "mozilla-build", "python")])
+# copy python.exe to python2.6.exe
+copyfile(join(stagedir, "mozilla-build", "python", "python.exe"),
+         join(stagedir, "mozilla-build", "python", "python2.6.exe"))
 check_call([join(sourcedir, "MSYS-1.0.11-rc-1.exe"),
             "/DIR=" + join(stagedir, "mozilla-build", "msys"),
             # "/VERYSILENT", "/SUPRESSMSGBOXES",
@@ -115,18 +115,19 @@ check_call([join(sourcedir, "msysDTK-1.0.1.exe"),
             "/DIR=" + join(stagedir, "mozilla-build", "msys"),
             # "/VERYSILENT", "/SUPRESSMSGBOXES",
             "/SP-", "/NOICONS"])
-check_call([join(sourcedir, "Mercurial-1.2.1.exe"),
-            "/DIR=" + join(stagedir, "mozilla-build", "hg"),
-            "/SP-", "/NOICONS"])
+check_call(["msiexec", "/i", 
+            join(sourcedir, "mercurial-1.5.4.msi"),
+            "/qn",
+            "INSTALLDIR=" + join(stagedir, "mozilla-build", "hg")])
 check_call([join(sourcedir, "KDiff3Setup_0.9.95.exe"),
             "/S",
             "/D=" + join(stagedir, "mozilla-build", "kdiff3")])
 
 # install setuptools from egg
-check_call([join(stagedir, "mozilla-build", "python25", "python.exe"),
+check_call([join(stagedir, "mozilla-build", "python", "python.exe"),
             join(sourcedir, "ez_setup.py"),
             "-H", "None",
-            join(sourcedir, "setuptools-0.6c9-py2.5.egg")])
+            join(sourcedir, "setuptools-0.6c11-py2.6.egg")])
 
 # install NSIS 2.46 Unicode
 check_call([join(sourcedir, "nsis-2.46-Unicode-setup.exe"),
@@ -153,8 +154,8 @@ def munge_easy_install_script(path):
     f.write("#!python.exe\n")
     f.write('\n'.join(lines[1:]))
     f.close()
-munge_easy_install_script(join(stagedir, "mozilla-build", "python25", "Scripts", "easy_install-script.py"))
-munge_easy_install_script(join(stagedir, "mozilla-build", "python25", "Scripts", "easy_install-2.5-script.py"))
+munge_easy_install_script(join(stagedir, "mozilla-build", "python", "Scripts", "easy_install-script.py"))
+munge_easy_install_script(join(stagedir, "mozilla-build", "python", "Scripts", "easy_install-2.6-script.py"))
 
 # Run an MSYS shell to perform the following tasks:
 # * install make-3.81.90
@@ -189,8 +190,6 @@ manifest = join(sourcedir, "noprivs.manifest")
 embed_recursedir(join(stagedir, "mozilla-build", "msys"), manifest)
 embedmanifest(join(stagedir, "mozilla-build", "moztools", "bin", "nsinstall.exe"), manifest)
 embedmanifest(join(stagedir, "mozilla-build", "moztools-180compat", "bin", "nsinstall.exe"), manifest)
-embedmanifest(join(stagedir, "mozilla-build", "python25", "Scripts", "easy_install.exe"), manifest)
-embedmanifest(join(stagedir, "mozilla-build", "python25", "Scripts", "easy_install-2.5.exe"), manifest)
 
 # Make an installer
 chdir(stagedir)
